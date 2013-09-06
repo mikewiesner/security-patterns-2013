@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mwiesner.com/MyOrder" xmlns:order="http://mwiesner.com/MyOrder" elementFormDefault="qualified">
+
+<complexType name="order">
+	<attribute name="name" use="required"/>
+	<attribute name="customer" use="required"/>
+	
+</complexType>
+
+</schema>
