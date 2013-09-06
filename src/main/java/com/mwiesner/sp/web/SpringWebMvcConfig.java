@@ -8,6 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan(basePackageClasses=OrderRestController.class)
 @EnableWebMvc
-public class SpringMVCSetup {
+public class SpringWebMvcConfig {
 
 }

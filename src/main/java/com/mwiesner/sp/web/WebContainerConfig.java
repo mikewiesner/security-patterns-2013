@@ -2,7 +2,7 @@ package com.mwiesner.sp.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebContainerConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -12,7 +12,7 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {SpringMVCSetup.class};
+		return new Class[] {SpringWebMvcConfig.class};
 	}
 
 	@Override
