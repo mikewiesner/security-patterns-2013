@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+
+<new-order>
+	<authentication user="mike" password="invalid"/>
+	<order type="downloadSecured">
+		<item>VMware Fusion</item>
+		<price>90.00</price>
+	</order>
+</new-order>
+
+

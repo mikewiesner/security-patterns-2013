@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-file="http://www.springframework.org/schema/integration/file"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml-2.1.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
+		http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file-2.1.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-2.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		<int-file:inbound-channel-adapter directory="src/test/resources/input" channel="fromFile"   />
+		
+		<int:channel id="fromFile"/>
+		
+		<int-file:file-to-string-transformer input-channel="fromFile" output-channel="newOrderXml" delete-files="false"/>
+		
+		<int:channel id="newOrderXml"/>
+		
+		<int-xml:xpath-router input-channel="newOrderXml" >
+			<int-xml:xpath-expression expression="//order/@type"/>
+		</int-xml:xpath-router>
+		
+		
+		<int:channel id="download" />
+		<int:channel id="box"/>
+		
+		<int-xml:xpath-filter input-channel="download" output-channel="downloadSecured" id="downloadSecurityCheck">
+			<int-xml:xpath-expression expression="/new-order/authentication[(@user = 'mike') and (@password = 'download')] "/>
+		</int-xml:xpath-filter>
+		
+		<int-xml:xpath-filter input-channel="box" output-channel="boxSecured" id="boxSecurityCheck">
+			<int-xml:xpath-expression expression="/new-order/authentication[(@user = 'mike') and (@password = 'box')] "/>
+		</int-xml:xpath-filter>
+		
+		<int:channel id="downloadSecured"/>
+		<int:channel id="boxSecured"/>
+		
+		<int:outbound-channel-adapter channel="downloadSecured" ref="orderEndpoint" method="processDownloadOrder"/>
+		<int:outbound-channel-adapter channel="boxSecured" ref="orderEndpoint" method="processBoxOrder"/>
+		
+		
+		<bean id="orderEndpoint" class="com.mwiesner.sp.OrderEndpoint"/>
+	
+		
+		<int:poller default="true" fixed-rate="500" time-unit="MILLISECONDS"/>
+
+
+</beans>

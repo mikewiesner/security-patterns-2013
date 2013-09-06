@@ -1,0 +1,56 @@
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'tomcat'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+version = '1.0'
+mainClassName = 'com.mwiesner.sp.Bootstrap'
+
+buildscript {
+	repositories {
+		add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+			name = 'GitHub'
+			addArtifactPattern 'http://cloud.github.com/downloads/[organisation]/[module]/[module]-[revision].[ext]'
+		}
+	}
+
+	dependencies {
+		classpath 'bmuschko:gradle-tomcat-plugin:0.9.5'
+	}
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+	compile('org.springframework:spring-core:3.1.3.RELEASE')
+	compile('org.springframework:spring-aop:3.1.3.RELEASE')
+	compile('org.springframework:spring-context:3.1.3.RELEASE')
+	compile('org.springframework:spring-oxm:3.1.3.RELEASE')
+	compile('org.springframework:spring-web:3.1.3.RELEASE')
+	compile('org.springframework.integration:spring-integration-core:2.1.4.RELEASE')
+	compile('org.springframework.integration:spring-integration-file:2.1.4.RELEASE')
+	compile('org.springframework.integration:spring-integration-stream:2.1.4.RELEASE')
+	compile('org.springframework.integration:spring-integration-xml:2.1.4.RELEASE')
+	compile('org.apache.commons:commons-io:1.3.2')
+	runtime('org.slf4j:jcl-over-slf4j:1.6.4')
+	runtime('org.slf4j:slf4j-simple:1.6.4')
+	providedCompile('javax.servlet:javax.servlet-api:3.0.1')
+	testCompile('junit:junit:4.10')
+	
+	def tomcatVersion = '7.0.32'
+	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+		   "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+	}
+}
+
+task wrapper(type: Wrapper) {
+	description = 'Generates gradlew[.bat] scripts'
+	gradleVersion = '1.2'
+}
+
+
