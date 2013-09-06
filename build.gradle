@@ -33,7 +33,7 @@ configurations {
 
 
 dependencies {
-	//compile('org.codehaus.jackson:jackson-mapper-asl:1.9.13')
+	compile('org.codehaus.jackson:jackson-mapper-asl:1.9.13')
 	compile("org.springframework:spring-core:${ext.springVersion}")
 	compile("org.springframework:spring-aop:${ext.springVersion}")
 	compile("org.springframework:spring-context:${ext.springVersion}")
