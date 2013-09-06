@@ -12,4 +12,3 @@ build
 .gradle
 bin
 
-src/main/java/com/mwiesner/myorder

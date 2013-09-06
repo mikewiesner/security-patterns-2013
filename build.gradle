@@ -33,15 +33,13 @@ configurations {
 
 
 dependencies {
+	//compile('org.codehaus.jackson:jackson-mapper-asl:1.9.13')
 	compile("org.springframework:spring-core:${ext.springVersion}")
 	compile("org.springframework:spring-aop:${ext.springVersion}")
 	compile("org.springframework:spring-context:${ext.springVersion}")
 	compile("org.springframework:spring-oxm:${ext.springVersion}")
 	compile("org.springframework:spring-web:${ext.springVersion}")
 	compile("org.springframework:spring-webmvc:${ext.springVersion}")
-	compile('org.codehaus.jackson:jackson-mapper-asl:1.9.13')
-	compile 'javax.xml.bind:jaxb-api:2.2.9'
-	compile 'com.sun.xml.bind:jaxb-impl:2.2.7'
 	compile('org.springframework.integration:spring-integration-core:2.1.4.RELEASE')
 	compile('org.springframework.integration:spring-integration-file:2.1.4.RELEASE')
 	compile('org.springframework.integration:spring-integration-stream:2.1.4.RELEASE')
@@ -58,7 +56,7 @@ dependencies {
 	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
 		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
 		
-	xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.4-1'
+	//xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.4-1'
 	}
 }
 
@@ -68,14 +66,4 @@ task wrapper(type: Wrapper) {
 }
 
 
-task xjc () {
- ant.taskdef(name: 'xjc', classname: 'com.sun.tools.xjc.XJCTask', classpath: configurations.xjc.asPath)
- 
- ant.xjc(
-  destdir: "src/main/java",
-  schema: 'src/main/resources/MyOrder.xsd'
- )
-}
-
-compileJava.dependsOn xjc
 

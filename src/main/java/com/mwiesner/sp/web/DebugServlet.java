@@ -1,4 +1,4 @@
-package com.mwiesner.sp;
+package com.mwiesner.sp.web;
 
 import java.io.IOException;
 import java.net.URL;

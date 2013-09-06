@@ -1,4 +1,4 @@
-package com.mwiesner.sp;
+package com.mwiesner.sp.web;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -6,9 +6,8 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.WebApplicationInitializer;
 
-public class WebAppInitializer implements WebApplicationInitializer{
+public class DebugWebAppInitializer{
 
-	@Override
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		DebugServlet debugServlet = new DebugServlet();
