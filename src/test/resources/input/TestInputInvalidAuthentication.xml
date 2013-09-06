@@ -2,7 +2,7 @@
 
 <new-order>
 	<authentication user="mike" password="invalid"/>
-	<order type="downloadSecured">
+	<order type="download">
 		<item>VMware Fusion</item>
 		<price>90.00</price>
 	</order>
