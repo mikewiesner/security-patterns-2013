@@ -11,6 +11,7 @@ package com.mwiesner.myorder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 
@@ -38,9 +39,10 @@ import javax.xml.bind.annotation.XmlSchemaType;
 public class Order {
 
 
-	@XmlAttribute(name = "name", required = true)
+	@XmlElement(name="name", namespace="http://mwiesner.com/MyOrder")
     @XmlSchemaType(name = "anySimpleType")
     protected String name;
+	
     @XmlAttribute(name = "customer", required = true)
     @XmlSchemaType(name = "anySimpleType")
     protected String customer;
