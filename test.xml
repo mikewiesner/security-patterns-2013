@@ -1,0 +1,3 @@
+<order xmlns="http://mwiesner.com/MyOrder" customer="Mike">
+	<name>Order1</name>
+</order>

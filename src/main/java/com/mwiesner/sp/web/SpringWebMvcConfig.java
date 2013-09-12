@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackageClasses=OrderRestController.class)
+@ComponentScan
 @EnableWebMvc
 @ImportResource("classpath:marshaller.xml")
 public class SpringWebMvcConfig {
